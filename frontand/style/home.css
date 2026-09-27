@@ -1,0 +1,267 @@
+.appbar{
+   
+   display: flex;
+   justify-content:space-between;
+   margin-top: 10px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* الحاوية الرئيسية للبانر */
+.hero-container {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  height: 380px; /* ضروري جداً لتحديد ارتفاع الـ div الكبير */
+  margin: 20px auto;
+  border-radius: 15px;
+  overflow: hidden; /* ضروري لقص أي زوائد للخلفية */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* طبقة الخلفية المموهة */
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px); /* تأثير التمويه */
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+/* طبقة العتمة فوق الخلفية لضمان وضوح النصوص */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(5, 13, 25, 0.75); /* درجة العتمة */
+  z-index: 2;
+}
+
+/* محتوى البانر (يجب أن يكون فوق الخلفية والعتمة) */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 40px;
+}
+
+/* تنسيق محتوى النصوص والصورة */
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* قسم النصوص */
+.hero-text {
+  flex: 1;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.hero-text h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.hero-text p {
+  font-size: 16px;
+  color: #cbd5e1;
+  margin-bottom: 25px;
+}
+
+/* زر تسوق الآن */
+.shop-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.shop-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* تنسيق حاوية الصورة لتأخذ مساحة كاملة وأنيقة */
+.hero-image {
+  flex: 1;
+  height: 300px; /* تحديد ارتفاع واضح للـ div */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+/* جعل الصورة تملأ الـ div بالكامل وبشكل احترافي */
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* تجبر الصورة على تغطية الـ div بالكامل */
+  object-position: center; /* تمركز الصورة في المنتصف */
+  filter: brightness(0.9); /* إضافة لمسة جمالية خفيفة */
+}
+
+/* أسهم التنقل الجانبية */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nav-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.left-arrow {
+  left: 15px;
+}
+
+.right-arrow {
+  right: 15px;
+}
+
+/* نقاط التنقل السفلية */
+.dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #3b82f6;
+  width: 20px;
+  border-radius: 4px;
+}
+
+
+/* تنسيق زر السهم */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5); /* خلفية سوداء شفافة لتكون واضحة */
+  color: #ffffff; /* لون السهم أبيض ساطع */
+  border: 2px solid rgba(255, 255, 255, 0.2); /* إطار خفيف وجميل */
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10; /* ضمان ظهورها في أعلى طبقة فوق كل العناصر */
+}
+
+/* تأثير عند تمرير الفأرة على السهم */
+.nav-arrow:hover {
+  background-color: #2563eb; /* يصبح لونها أزرق عند التحويم */
+  border-color: #2563eb;
+  transform: translateY(-50%) scale(1.1); /* تكبير بسيط وفخم */
+}
+
+/* مواقع الأسهم على الأطراف بدقة */
+.left-arrow {
+  left: 20px; /* مسافة من اليمين أو اليسار حسب الاتجاه */
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+
+/* حاوية النقاط في أسفل البانر */
+.dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+/* شكل النقطة العادية */
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* شكل النقطة النشطة الحالية */
+.dot.active {
+  background-color: #2563eb;
+  width: 25px;
+  border-radius: 5px;
+}
