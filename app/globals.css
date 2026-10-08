@@ -3,7 +3,11 @@
 /* استيراد خط Cairo بأوزان مختلفة (عادي، شبه عريض، عريض) */
 
 
-
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 body {
   font-family: 'Cairo', sans-serif; /* تطبيق الخط كخط أساسي */
   background-color: #f8fafc; /* لون خلفية عام وناعم للموقع */
