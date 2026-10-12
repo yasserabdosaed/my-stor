@@ -39,6 +39,7 @@ export default function AddPage() {
             console.log("خطأ في الاتصال:", err);
             // alert("فشل الاتصال بالسيرفر، تأكد أنه يعمل!");
         }
+  
     };
 
     // 3. واجهة الصفحة (JSX)

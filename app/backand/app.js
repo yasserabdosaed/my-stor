@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     res.send("Hello World");
 });
 
-app.post("frontand/Pages/add", async (req, res) => {
+app.post("/frontand/Pages/add", async (req, res) => {
     try {
         console.log("البيانات المستلمة:", req.body);
         
@@ -41,3 +41,21 @@ app.post("frontand/Pages/add", async (req, res) => {
         });
     }
 });
+
+
+
+app.get("/frontand/Pages/get", async (req, res) => {
+ try {
+    const dat = await models.find({});
+    res.status(200).json({
+        success: true,
+        data:dat
+    })
+ }catch (err) {
+    console.log("خطأ أثناء الحفظ:", err);
+   res.status(500).json({
+    success:false,
+    message: "حدث خطأ في الخادم أثناء الحفظ"
+   })
+ }
+})
