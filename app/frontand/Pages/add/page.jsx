@@ -10,13 +10,18 @@ export default function AddPage() {
         sub: "",
         img: "",
         category: "computers", // قيمة افتراضية أولى
-      
     });
-    const [btgt,btset] = useState(false);
+    
+    const [loading, setLoading] = useState(false);
+    
+    // حالة جديدة لتخزين رسالة التنبيه الاحترافية (النص والنوع: success أو error)
+    const [statusMessage, setStatusMessage] = useState(null);
 
-    // 2. دالة إرسال البيانات للباك إند (تم جعلها داخل المكون وتصحيح fetch)
+    // 2. دالة إرسال البيانات للباك إند
     const handleSend = async (e) => {
-        e.preventDefault(); // منع إعادة تحميل الصفحة تلقائياً
+        e.preventDefault(); 
+        setLoading(true); 
+        setStatusMessage(null); // إخفاء أي رسالة قديمة قبل البدء
 
         try {
             const response = await fetch("http://localhost:5000/frontand/Pages/add", {
@@ -30,16 +35,37 @@ export default function AddPage() {
             const data = await response.json();
             console.log("رد السيرفر:", data);
 
-            // تحديث حالة الزر عند النجاح
-            btset(true);
+            if (response.ok) {
+                // إظهار رسالة النجاح الاحترافية
+                setStatusMessage({
+                    type: "success",
+                    text: "✨ تم إضافة المنتج بنجاح إلى قاعدة البيانات!"
+                });
 
-            // alert("تم إضافة المنتج بنجاح!");
+                // تفريغ الحقول بعد الإضافة الناجحة
+                allset({
+                    name: "",
+                    sub: "",
+                    img: "",
+                    category: "computers",
+                });
+            } else {
+                // إظهار رسالة الفشل
+                setStatusMessage({
+                    type: "error",
+                    text: "❌ فشل في إضافة المنتج، يرجى المحاولة لاحقاً."
+                });
+            }
 
         } catch (err) {
             console.log("خطأ في الاتصال:", err);
-            // alert("فشل الاتصال بالسيرفر، تأكد أنه يعمل!");
+            setStatusMessage({
+                type: "error",
+                text: "⚠️ فشل الاتصال بالسيرفر، تأكد أنه يعمل!"
+            });
+        } finally {
+            setLoading(false); 
         }
-  
     };
 
     // 3. واجهة الصفحة (JSX)
@@ -64,6 +90,22 @@ export default function AddPage() {
                 padding: "20px",
                 borderRadius: "8px"
             }}>
+                
+                {/* عرض رسالة التنبيه الاحترافية إذا كانت موجودة */}
+                {statusMessage && (
+                    <div style={{
+                        padding: "12px",
+                        marginBottom: "20px",
+                        borderRadius: "6px",
+                        fontWeight: "bold",
+                        backgroundColor: statusMessage.type === "success" ? "#d1e7dd" : "#f8d7da",
+                        color: statusMessage.type === "success" ? "#0f5132" : "#842029",
+                        border: `1px solid ${statusMessage.type === "success" ? "#badbcc" : "#f5c2c7"}`
+                    }}>
+                        {statusMessage.text}
+                    </div>
+                )}
+
                 <form onSubmit={handleSend}>
                     <label className="la">اسم المنتج</label>
                     <br/>
@@ -73,6 +115,7 @@ export default function AddPage() {
                         type="text" 
                         value={allget.name}
                         placeholder="اسم المنتج" 
+                        required
                     />
                     <br/><br/>
 
@@ -84,6 +127,7 @@ export default function AddPage() {
                         type="number" 
                         value={allget.sub}
                         placeholder="سعر المنتج" 
+                        required
                     />
                     <br/><br/>
 
@@ -95,6 +139,7 @@ export default function AddPage() {
                         type="text" 
                         value={allget.img}
                         placeholder="رابط الصورة" 
+                        required
                     />
                     <br/><br/>
 
@@ -112,8 +157,19 @@ export default function AddPage() {
                     </select>
                     <br/><br/>
 
-                    <button type="submit" style={{ padding: "10px 20px", cursor: "pointer" }}>
-                        اضافه منتج
+                    <button 
+                        type="submit" 
+                        disabled={loading} 
+                        style={{ 
+                            padding: "10px 20px", 
+                            cursor: loading ? "not-allowed" : "pointer",
+                            backgroundColor: loading ? "#ccc" : "blue",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "5px"
+                        }}
+                    >
+                        {loading ? "جاري الإضافة..." : "اضافه منتج"}
                     </button>
                 </form> 
             </div>
